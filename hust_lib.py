@@ -1,6 +1,5 @@
-#!/usr/bin/python
-#coding=utf-8
-#Filename:hust_lib.py
+#!/usr/bin/python3
+# coding=utf-8
 import urllib
 import urllib.request
 import re
@@ -12,14 +11,15 @@ def get(url):
         print('未找到')
     return (about)
 def show(url):
-    for i in range(0,len(get(url))):
-        print(get(url)[i])
+    content=get(url)
+    for i in range(0,len(content)):
+        print(content[i])
 def next(url):
     ndata=urllib.request.urlopen(url).read().decode('utf-8')
     if re.search('后一页',ndata):
         nurl=re.compile(r'<a href="(.*?)">后一页</a>').findall(ndata)
         url='http://ftp.lib.hust.edu.cn/'+nurl[0]
-        z=input('有后一页，按y/Y进入后一页，按n/N退出\n请输入==>')
+        z=input('\n有后一页，按y/Y进入后一页，按n/N退出\n请输入==>')
         if z=='y' or z=='Y':
             show(url)
             next(url)
