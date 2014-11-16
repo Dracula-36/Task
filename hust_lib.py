@@ -13,7 +13,10 @@ def get(url):
 def show(url):
     content=get(url)
     for i in range(0,len(content)):
-        print(content[i])
+        print('书名:',content[i][0])
+        print('作者:',content[i][1])
+        print('出版相关信息:',content[i][2],' ',content[i][3])
+        print('简介:',content[i][4])
 def next(url):
     ndata=urllib.request.urlopen(url).read().decode('utf-8')
     if re.search('后一页',ndata):
