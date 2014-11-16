@@ -13,16 +13,17 @@ def get(url):
 def show(url):
     content=get(url)
     for i in range(0,len(content)):
-        print('书名:',content[i][0])
+        print('书名:《{0}》'.format(content[i][0]))
         print('作者:',content[i][1])
-        print('出版相关信息:',content[i][2],' ',content[i][3])
-        print('简介:',content[i][4])
+        print('主编:',content[i][2])
+        print('出版相关信息:',content[i][3])
+        print('简介:{0}\n'.format(content[i][4]))
 def next(url):
     ndata=urllib.request.urlopen(url).read().decode('utf-8')
     if re.search('后一页',ndata):
         nurl=re.compile(r'<a href="(.*?)">后一页</a>').findall(ndata)
         url='http://ftp.lib.hust.edu.cn/'+nurl[0]
-        z=input('\n有后一页，按y/Y进入后一页，按n/N退出\n请输入==>')
+        z=input('有后一页，按y/Y进入后一页，按n/N退出\n请输入==>')
         if z=='y' or z=='Y':
             show(url)
             next(url)
